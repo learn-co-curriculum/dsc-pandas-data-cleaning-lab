@@ -1,18 +1,22 @@
 
-# Pandas Summative Lab
+# Project - Data Cleaning
 
 ## Introduction
 In this lab, we'll make use of everything we've learned about pandas, data cleaning, and Exploratory Data Analysis. In order to complete this lab, you'll have to make import, clean, combine, reshape, and visualize data to answer questions provided, as well as your own questions!
 
-### The Dataset
+## Objectives
+You will be able to:
+* Show mastery of the content covered in this section
+
+## The Dataset
 In this lab, we'll work with the comprehensive [Super Heroes Dataset](https://www.kaggle.com/claudiodavi/superhero-set/data), which can be found on Kaggle!
 
-### Objectives
+## Goals
 * Use all available pandas knowledge to clean the dataset and deal with null values
 * Use Queries and aggregations to group the data into interesting subsets as needed
 * Use descriptive statistics and data visualization to find answers to questions we may have about the data. 
 
-### Getting Started
+## Getting Started
 
 In the cell below:
 
@@ -45,7 +49,7 @@ It looks as if the heroes information dataset contained an index column.  We did
 
 Our DataFrame provided row indices by default, so this column is not needed.  Drop it from the DataFrame in place in the cell below, and then display the head of `heroes_df` to ensure that it worked properly. 
 
-### Familiarize Yourself With the Dataset
+## Familiarize Yourself With the Dataset
 
 The first step in our Exploratory Data Analysis will be to get familiar with the data.  This step includes:
 
@@ -56,7 +60,7 @@ The first step in our Exploratory Data Analysis will be to get familiar with the
 
 In the cell below, get the descriptive statistics of each DataFrame.  
 
-### Dealing with Null Values
+## Dealing with Null Values
 
 Starting in the cell below, detect and deal with any null values in either data frame.  Then, explain your methodology for detecting and dealing with outliers in the markdown section below.  Be sure to explain your strategy for dealing with null values in numeric columns, as well as your strategy for dealing with null values in non-numeric columns.  
 
@@ -71,7 +75,7 @@ ________________________________________________________________________________
 
 
 
-### Joining, Grouping, and Aggregating
+## Joining, Grouping, and Aggregating
 
 In the cell below, join the two DataFrames.  Think about which sort of join you should use, as well as which columns you should join on.  Rename columns and manipulate as needed.  
 
@@ -168,9 +172,9 @@ Some sample cells have been provided to give you room to work. If you need to cr
 
 Be sure to include thoughtful, well-labeled visualizations to back up your analysis!
 
-# Conclusion
+## Summary
 
 In this lab, we demonstrated our mastery of:
-* Use all available pandas knowledge to clean the dataset and deal with null values
-* Use Queries and aggregations to group the data into interesting subsets as needed
-* Use descriptive statistics and data visualization to find answers to questions we may have about the data.
+* Using all of our Pandas knowledge to date to clean the dataset and deal with null values
+* Using Queries and aggregations to group the data into interesting subsets as needed
+* Using descriptive statistics and data visualization to find answers to questions we may have about the data
