@@ -17,16 +17,12 @@ In this lab, we'll work with the comprehensive [Super Heroes Dataset](https://ww
 In the cell below:
 
 * Import and alias pandas as `pd`
-* Import and alias numpy as `np`
-* Import and alias seaborn as `sns`
 * Import and alias matplotlib.pyplot as `plt`
 * Set matplotlib visualizations to display inline in the notebook
 
 
-```
+```python
 import pandas as pd
-import numpy as np
-import seaborn as sns
 import matplotlib.pyplot as plt
 %matplotlib inline
 ```
@@ -36,7 +32,7 @@ For this lab, our dataset is split among two different sources--`heroes_informat
 Use pandas to read in each file and store them in DataFrames in the appropriate variables below. Then, display the head of each to ensure that everything loaded correctly.  
 
 
-```
+```python
 heroes_df = pd.read_csv('heroes_information.csv')
 powers_df = pd.read_csv('super_hero_powers.csv')
 
@@ -329,7 +325,7 @@ It looks as if the heroes information dataset contained an index column.  We did
 Our DataFrame provided row indices by default, so this column is not needed.  Drop it from the DataFrame in place in the cell below, and then display the head of `heroes_df` to ensure that it worked properly. 
 
 
-```
+```python
 heroes_df.drop("Unnamed: 0", axis=1, inplace=True)
 heroes_df.head()
 ```
@@ -451,7 +447,7 @@ The first step in our Exploratory Data Analysis will be to get familiar with the
 In the cell below, get the descriptive statistics of each DataFrame.  
 
 
-```
+```python
 display(heroes_df.describe())
 powers_df.describe()
 ```
@@ -620,7 +616,7 @@ powers_df.describe()
     </tr>
     <tr>
       <th>top</th>
-      <td>Black Lightning</td>
+      <td>Green Arrow</td>
       <td>False</td>
       <td>False</td>
       <td>False</td>
@@ -689,7 +685,7 @@ The `Weight` and `Publisher` columns contain null values.  Student should replac
 
 
 
-```
+```python
 heroes_df.isna().any()
 ```
 
@@ -711,7 +707,7 @@ heroes_df.isna().any()
 
 
 
-```
+```python
 heroes_df.isna().sum()
 ```
 
@@ -733,8 +729,8 @@ heroes_df.isna().sum()
 
 
 
-```
-mean_weight = np.mean(heroes_df.Weight)
+```python
+mean_weight = heroes_df.Weight.mean()
 heroes_df['Weight'].fillna(mean_weight, inplace=True)
 heroes_df.isna().sum()
 ```
@@ -757,7 +753,7 @@ heroes_df.isna().sum()
 
 
 
-```
+```python
 powers_df.isna().any()
 ```
 
@@ -830,7 +826,7 @@ powers_df.isna().any()
 
 
 
-```
+```python
 # Let's check if any of these are True, rather than reading them all, by 
 # just chaining another call to .any()
 powers_df.isna().any().any()
@@ -850,17 +846,17 @@ In the cell below, join the two DataFrames.  Think about which sort of join you 
 **_HINT:_** If the join throws an error message, consider settin the the column you want to join on as the index for each DataFrame.  
 
 
-```
+```python
 powers_df.rename(columns={'hero_names':'name'}, inplace=True)
 ```
 
 
-```
+```python
 powers_df  = powers_df.astype('str')
 ```
 
 
-```
+```python
 heroes_and_powers_df = powers_df.set_index('name').join(heroes_df.set_index('name'), how='inner')
 heroes_and_powers_df.head()
 ```
@@ -1064,7 +1060,7 @@ heroes_and_powers_df.head()
 In the cell below, subset male and female heroes into different dataframes.  Create a scatterplot of the height and weight of each hero, with weight as the y-axis.  Plot both the male and female heroes subset into each dataframe, and make the color for each point in the scatterplot correspond to the gender of the superhero.
 
 
-```
+```python
 heroes_and_powers_df.isna().sum()
 ```
 
@@ -1148,13 +1144,13 @@ In the cell below:
 Hint: Don't forget to check the [seaborn documentation for distplot](https://seaborn.pydata.org/generated/seaborn.distplot.html) if you have questions about how to use it correctly! 
 
 
-```
+```python
 male_heroes_df = heroes_df[heroes_df['Gender'] == 'Male']
 female_heroes_df = heroes_df[heroes_df['Gender'] == 'Female']
 
 def show_distplot(dataframe, gender, column_name):
     plt.plot()
-    sns.distplot(dataframe[column_name])
+    dataframe[column_name].hist()
     plt.title("Distribution of {} for {} heroes".format(column_name, gender))
     plt.xlabel(column_name)
     plt.ylabel("Probability Density")
@@ -1162,68 +1158,68 @@ def show_distplot(dataframe, gender, column_name):
 ```
 
 
-```
+```python
 # Male Height
 show_distplot(heroes_and_powers_df, 'Male', 'Height')
-print("Mean Height for male heroes: {}".format(np.mean(male_heroes_df.Height)))
-print("Median Height for male heroes: {}".format(np.median(male_heroes_df.Height)))
+print("Mean Height for male heroes: {}".format(male_heroes_df.Height.mean()))
+print("Median Height for male heroes: {}".format(male_heroes_df.Height.median()))
 ```
 
 
-![png](output_22_0.png)
+![png](index_files/index_22_0.png)
 
 
     Mean Height for male heroes: 107.27524752475247
     Median Height for male heroes: 180.0
-    
 
 
-```
+
+```python
 # Male Weight
 show_distplot(heroes_and_powers_df, 'Male', 'Weight')
-print("Mean weight for male heroes: {}".format(np.mean(male_heroes_df.Weight)))
-print("Median weight for male heroes: {}".format(np.median(male_heroes_df.Weight)))
+print("Mean weight for male heroes: {}".format(male_heroes_df.Weight.mean()))
+print("Median weight for male heroes: {}".format(male_heroes_df.Weight.median()))
 ```
 
 
-![png](output_23_0.png)
+![png](index_files/index_23_0.png)
 
 
     Mean weight for male heroes: 52.03535681436996
     Median weight for male heroes: 79.0
-    
 
 
-```
+
+```python
 # Female Height
 show_distplot(heroes_and_powers_df, 'Female', 'Height')
-print("Mean weight for female heroes: {}".format(np.mean(male_heroes_df.Height)))
-print("Median weight for female heroes: {}".format(np.median(male_heroes_df.Height)))
+print("Mean weight for female heroes: {}".format(male_heroes_df.Height.mean()))
+print("Median weight for female heroes: {}".format(male_heroes_df.Height.median()))
 ```
 
 
-![png](output_24_0.png)
+![png](index_files/index_24_0.png)
 
 
     Mean weight for female heroes: 107.27524752475247
     Median weight for female heroes: 180.0
-    
 
 
-```
+
+```python
 # Female Weight
 show_distplot(heroes_and_powers_df, 'Female', 'Weight')
-print("Mean weight for female heroes: {}".format(np.mean(female_heroes_df.Weight)))
-print("Median weight for female heroes: {}".format(np.median(male_heroes_df.Weight)))
+print("Mean weight for female heroes: {}".format(female_heroes_df.Weight.mean()))
+print("Median weight for female heroes: {}".format(male_heroes_df.Weight.median()))
 ```
 
 
-![png](output_25_0.png)
+![png](index_files/index_25_0.png)
 
 
     Mean weight for female heroes: 27.265
     Median weight for female heroes: 79.0
-    
+
 
 Discuss your findings from the plots above, with respect to the distibution of height and weight by gender.  Your explanation should include discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
 
@@ -1233,7 +1229,7 @@ ________________________________________________________________________________
 Ideally, students should comment on the outliers that fall below 0 for the height and weight. Further investigation demonstrates that all heights and weights below zero are set to -99, which suggests that these may have originally been missing values which were filled with an erroneous value. This investigation and subsequent plots with these values removed is demonstrated below.
 
 
-```
+```python
 print('Top Negative Heights:')
 print(heroes_df[heroes_df.Height < 0].Height.value_counts())
 
@@ -1247,10 +1243,10 @@ print(heroes_df[heroes_df.Weight < 0].Weight.value_counts())
     Top Negative Weights:
     -99.0    237
     Name: Weight, dtype: int64
-    
 
 
-```
+
+```python
 for feat in ['Height', 'Weight']:
     df = heroes_and_powers_df[heroes_and_powers_df[feat]>0] #Temporarily remove negatives
     for group in ['Male', 'Female']:
@@ -1260,36 +1256,36 @@ for feat in ['Height', 'Weight']:
 ```
 
 
-![png](output_28_0.png)
+![png](index_files/index_28_0.png)
 
 
     Mean Height for Male heroes: 192.4622093023256
     Median Height for Male heroes: 185.0
-    
 
 
-![png](output_28_2.png)
+
+![png](index_files/index_28_2.png)
 
 
     Mean Height for Female heroes: 174.74817518248176
     Median Height for Female heroes: 170.0
-    
 
 
-![png](output_28_4.png)
+
+![png](index_files/index_28_4.png)
 
 
     Mean Weight for Male heroes: 126.24802205907002
     Median Weight for Male heroes: 90.0
-    
 
 
-![png](output_28_6.png)
+
+![png](index_files/index_28_6.png)
 
 
     Mean Weight for Female heroes: 79.85925925925926
     Median Weight for Female heroes: 58.0
-    
+
 
 Final comment: all distributions now display a normal distribution, as would be expected for heights and weights of a random population.
 
@@ -1302,7 +1298,7 @@ The rest of this notebook will be left to you to investigate the dataset by form
 * What are the 5 most common powers in the DC Universe?
 
 
-```
+```python
 def top_5_powers(dataframe):
     df = dataframe.drop(heroes_df.columns.values[1:], axis=1)
     columns = df.columns.values
@@ -1320,28 +1316,28 @@ print(overall_top_5)
 ```
 
     [('Super Strength', 362), ('Stamina', 294), ('Durability', 262), ('Super Speed', 251), ('Agility', 244)]
-    
 
 
-```
+
+```python
 marvel_top_5 = top_5_powers(marvel_df)
 print(marvel_top_5)
 ```
 
     [('Super Strength', 204), ('Durability', 154), ('Stamina', 150), ('Super Speed', 137), ('Agility', 126)]
-    
 
 
-```
+
+```python
 dc_top_5 = top_5_powers(dc_df)
 print(dc_top_5)
 ```
 
     [('Super Strength', 109), ('Stamina', 90), ('Flight', 86), ('Super Speed', 79), ('Agility', 71)]
-    
 
 
-```
+
+```python
 def top_5_bar_chart(top_5_list, publisher=None):
     marvel_powers = [i[0] for i in top_5_list]
     marvel_values = [i[1] for i in top_5_list]
@@ -1367,7 +1363,7 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 
 
 
-![png](output_34_1.png)
+![png](index_files/index_34_1.png)
 
 
 
@@ -1379,7 +1375,7 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 
 
 
-![png](output_34_4.png)
+![png](index_files/index_34_4.png)
 
 
 
@@ -1391,7 +1387,7 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 
 
 
-![png](output_34_7.png)
+![png](index_files/index_34_7.png)
 
 
 Analyze the results you found above to answer the following question:
