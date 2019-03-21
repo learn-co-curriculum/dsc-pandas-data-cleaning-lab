@@ -56,7 +56,7 @@ The first step in our Exploratory Data Analysis will be to get familiar with the
 * Understanding the dimensionality of your dataset
 * Investigating what type of data it contains, and the data types used to store it
 * Discovering how missing values are encoded, and how many there are
-* Getting a feel for what information it does and doesnt contain
+* Getting a feel for what information it does and doesn't contain
 
 In the cell below, get the descriptive statistics of each DataFrame.  
 
@@ -79,7 +79,7 @@ ________________________________________________________________________________
 
 In the cell below, join the two DataFrames.  Think about which sort of join you should use, as well as which columns you should join on.  Rename columns and manipulate as needed.  
 
-**_HINT:_** If the join throws an error message, consider settin the the column you want to join on as the index for each DataFrame.  
+**_HINT:_** If the join throws an error message, consider setting the column you want to join on as the index for each DataFrame.  
 
 In the cell below, subset male and female heroes into different dataframes.  Create a scatterplot of the height and weight of each hero, with weight as the y-axis.  Plot both the male and female heroes subset into each dataframe, and make the color for each point in the scatterplot correspond to the gender of the superhero.
 
@@ -127,7 +127,7 @@ def show_distplot(dataframe, gender, column_name):
 
 ```
 
-Discuss your findings from the plots above, with respect to the distibution of height and weight by gender.  Your explanation should include discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
+Discuss your findings from the plots above, with respect to the distribution of height and weight by gender.  Your explanation should include discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
 
 Wite your answer below this line:
 ____________________________________________________________________________________________________________________________
@@ -156,7 +156,7 @@ For the remainder of this lab, you'll be focusing on coming up with and answerin
 
 Pick one of the following questions to investigate and answer, or come up with one of your own!
 
-* Which powers have the highest chance of co-occuring in a hero (e.g. super strength and flight), and does this differ by gender?
+* Which powers have the highest chance of co-occurring in a hero (e.g. super strength and flight), and does this differ by gender?
 * Is there a relationship between a hero's height and weight and their powerset?
 * What is the distribution of skin colors amongst alien heroes?
 
