@@ -17,12 +17,16 @@ In this lab, we'll work with the comprehensive [Super Heroes Dataset](https://ww
 In the cell below:
 
 * Import and alias pandas as `pd`
+* Import and alias numpy as `np`
+* Import and alias seaborn as `sns`
 * Import and alias matplotlib.pyplot as `plt`
 * Set matplotlib visualizations to display inline in the notebook
 
 
 ```python
 import pandas as pd
+import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 %matplotlib inline
 ```
@@ -616,7 +620,7 @@ powers_df.describe()
     </tr>
     <tr>
       <th>top</th>
-      <td>Green Arrow</td>
+      <td>Skaar</td>
       <td>False</td>
       <td>False</td>
       <td>False</td>
@@ -843,7 +847,17 @@ powers_df.isna().any().any()
 
 In the cell below, join the two DataFrames.  Think about which sort of join you should use, as well as which columns you should join on.  Rename columns and manipulate as needed.  
 
+**_HINT:_** Consider the possibility that the columns you choose to join on contain duplicate entries. If that is the case, devise a strategy to deal with the duplicates.
+
 **_HINT:_** If the join throws an error message, consider setting the column you want to join on as the index for each DataFrame.  
+
+
+```python
+# Drop duplicate names
+heroes_df.drop_duplicates(subset="name", inplace=True)
+# Reset index values
+heroes_df.reset_index(drop=True, inplace=True)
+```
 
 
 ```python
@@ -1061,75 +1075,22 @@ In the cell below, subset male and female heroes into different dataframes.  Cre
 
 
 ```python
-heroes_and_powers_df.isna().sum()
+male_heroes_df = heroes_df[heroes_df['Gender'] == 'Male']
+female_heroes_df = heroes_df[heroes_df['Gender'] == 'Female']
+
+ax = male_heroes_df.plot.scatter(x="Height", y="Weight", c="k", label="Male")
+female_heroes_df.plot.scatter(x="Height", y="Weight", c="c", label="Female", ax=ax)
 ```
 
 
 
 
-    Agility                   0
-    Accelerated Healing       0
-    Lantern Power Ring        0
-    Dimensional Awareness     0
-    Cold Resistance           0
-    Durability                0
-    Stealth                   0
-    Energy Absorption         0
-    Flight                    0
-    Danger Sense              0
-    Underwater breathing      0
-    Marksmanship              0
-    Weapons Master            0
-    Power Augmentation        0
-    Animal Attributes         0
-    Longevity                 0
-    Intelligence              0
-    Super Strength            0
-    Cryokinesis               0
-    Telepathy                 0
-    Energy Armor              0
-    Energy Blasts             0
-    Duplication               0
-    Size Changing             0
-    Density Control           0
-    Stamina                   0
-    Astral Travel             0
-    Audio Control             0
-    Dexterity                 0
-    Omnitrix                  0
-                             ..
-    Matter Absorption         0
-    The Force                 0
-    Resurrection              0
-    Terrakinesis              0
-    Vision - Heat             0
-    Vitakinesis               0
-    Radar Sense               0
-    Qwardian Power Ring       0
-    Weather Control           0
-    Vision - X-Ray            0
-    Vision - Thermal          0
-    Web Creation              0
-    Reality Warping           0
-    Odin Force                0
-    Symbiote Costume          0
-    Speed Force               0
-    Phoenix Force             0
-    Molecular Dissipation     0
-    Vision - Cryo             0
-    Omnipresent               0
-    Omniscient                0
-    Gender                    0
-    Eye color                 0
-    Race                      0
-    Hair color                0
-    Height                    0
-    Publisher                13
-    Skin color                0
-    Alignment                 0
-    Weight                    0
-    Length: 176, dtype: int64
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a1a161358>
 
+
+
+
+![png](index_files/index_20_1.png)
 
 
 ## Some Initial Investigation
@@ -1139,7 +1100,7 @@ Next, slice the DataFrame as needed and visualize the distribution of heights an
 In the cell below:
 
 * Slice the DataFrame into separate DataFrames by gender
-* Complete the `show_distplot` function.  This helper function should take in a DataFrame, a string containing the gender we want to visualize, and and the column name we want to visualize by gender. The function should display a distplot visualization from seaborn of the column/gender combination.  
+* Complete the `show_distplot` function.  This helper function should take in a DataFrame, a string containing the gender we want to visualize, and the column name we want to visualize by gender. The function should display a distplot visualization from seaborn of the column/gender combination.  
 
 Hint: Don't forget to check the [seaborn documentation for distplot](https://seaborn.pydata.org/generated/seaborn.distplot.html) if you have questions about how to use it correctly! 
 
@@ -1160,70 +1121,70 @@ def show_distplot(dataframe, gender, column_name):
 
 ```python
 # Male Height
-show_distplot(heroes_and_powers_df, 'Male', 'Height')
-print("Mean Height for male heroes: {}".format(male_heroes_df.Height.mean()))
-print("Median Height for male heroes: {}".format(male_heroes_df.Height.median()))
-```
-
-
-![png](index_files/index_22_0.png)
-
-
-    Mean Height for male heroes: 107.27524752475247
-    Median Height for male heroes: 180.0
-
-
-
-```python
-# Male Weight
-show_distplot(heroes_and_powers_df, 'Male', 'Weight')
-print("Mean weight for male heroes: {}".format(male_heroes_df.Weight.mean()))
-print("Median weight for male heroes: {}".format(male_heroes_df.Weight.median()))
+show_distplot(male_heroes_df, 'Male', 'Height')
+print("Mean height for male heroes: {}".format(male_heroes_df.Height.mean()))
+print("Median height for male heroes: {}".format(male_heroes_df.Height.median()))
 ```
 
 
 ![png](index_files/index_23_0.png)
 
 
-    Mean weight for male heroes: 52.03535681436996
-    Median weight for male heroes: 79.0
+    Mean height for male heroes: 109.11201629327903
+    Median height for male heroes: 180.0
 
 
 
 ```python
-# Female Height
-show_distplot(heroes_and_powers_df, 'Female', 'Height')
-print("Mean weight for female heroes: {}".format(male_heroes_df.Height.mean()))
-print("Median weight for female heroes: {}".format(male_heroes_df.Height.median()))
+# Male Weight
+show_distplot(male_heroes_df, 'Male', 'Weight')
+print("Mean weight for male heroes: {}".format(male_heroes_df.Weight.mean()))
+print("Median weight for male heroes: {}".format(male_heroes_df.Weight.median()))
 ```
 
 
 ![png](index_files/index_24_0.png)
 
 
-    Mean weight for female heroes: 107.27524752475247
-    Median weight for female heroes: 180.0
+    Mean weight for male heroes: 53.519053342681936
+    Median weight for male heroes: 79.0
 
 
 
 ```python
-# Female Weight
-show_distplot(heroes_and_powers_df, 'Female', 'Weight')
-print("Mean weight for female heroes: {}".format(female_heroes_df.Weight.mean()))
-print("Median weight for female heroes: {}".format(male_heroes_df.Weight.median()))
+# Female Height
+show_distplot(female_heroes_df, 'Female', 'Height')
+print("Mean height for female heroes: {}".format(female_heroes_df.Height.mean()))
+print("Median height for female heroes: {}".format(female_heroes_df.Height.median()))
 ```
 
 
 ![png](index_files/index_25_0.png)
 
 
-    Mean weight for female heroes: 27.265
+    Mean height for female heroes: 97.99234693877551
+    Median height for female heroes: 168.0
+
+
+
+```python
+# Female Weight
+show_distplot(female_heroes_df, 'Female', 'Weight')
+print("Mean weight for female heroes: {}".format(female_heroes_df.Weight.mean()))
+print("Median weight for female heroes: {}".format(male_heroes_df.Weight.median()))
+```
+
+
+![png](index_files/index_26_0.png)
+
+
+    Mean weight for female heroes: 27.433673469387756
     Median weight for female heroes: 79.0
 
 
 Discuss your findings from the plots above, with respect to the distribution of height and weight by gender.  Your explanation should include discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
 
-Wite your answer below this line:
+Write your answer below this line:
 ____________________________________________________________________________________________________________________________
 
 Ideally, students should comment on the outliers that fall below 0 for the height and weight. Further investigation demonstrates that all heights and weights below zero are set to -99, which suggests that these may have originally been missing values which were filled with an erroneous value. This investigation and subsequent plots with these values removed is demonstrated below.
@@ -1238,10 +1199,10 @@ print(heroes_df[heroes_df.Weight < 0].Weight.value_counts())
 ```
 
     Top Negative Heights:
-    -99.0    217
+    -99.0    209
     Name: Height, dtype: int64
     Top Negative Weights:
-    -99.0    237
+    -99.0    229
     Name: Weight, dtype: int64
 
 
@@ -1250,41 +1211,41 @@ print(heroes_df[heroes_df.Weight < 0].Weight.value_counts())
 for feat in ['Height', 'Weight']:
     df = heroes_and_powers_df[heroes_and_powers_df[feat]>0] #Temporarily remove negatives
     for group in ['Male', 'Female']:
-        show_distplot(df, group, feat)
+        show_distplot(df[df['Gender']==group], group, feat)
         print("Mean {} for {} heroes: {}".format(feat, group, df[df['Gender']==group][feat].mean()))
         print("Median {} for {} heroes: {}".format(feat, group, df[df['Gender']==group][feat].median()))
 ```
 
 
-![png](index_files/index_28_0.png)
+![png](index_files/index_29_0.png)
 
 
-    Mean Height for Male heroes: 192.4622093023256
+    Mean Height for Male heroes: 192.62314540059347
     Median Height for Male heroes: 185.0
 
 
 
-![png](index_files/index_28_2.png)
+![png](index_files/index_29_2.png)
 
 
-    Mean Height for Female heroes: 174.74817518248176
+    Mean Height for Female heroes: 174.90671641791045
     Median Height for Female heroes: 170.0
 
 
 
-![png](index_files/index_28_4.png)
+![png](index_files/index_29_4.png)
 
 
-    Mean Weight for Male heroes: 126.24802205907002
+    Mean Weight for Male heroes: 126.84594103842267
     Median Weight for Male heroes: 90.0
 
 
 
-![png](index_files/index_28_6.png)
+![png](index_files/index_29_6.png)
 
 
-    Mean Weight for Female heroes: 79.85925925925926
-    Median Weight for Female heroes: 58.0
+    Mean Weight for Female heroes: 80.34848484848484
+    Median Weight for Female heroes: 57.5
 
 
 Final comment: all distributions now display a normal distribution, as would be expected for heights and weights of a random population.
@@ -1315,7 +1276,7 @@ dc_df = heroes_and_powers_df[heroes_and_powers_df['Publisher'] == 'DC Comics']
 print(overall_top_5)
 ```
 
-    [('Super Strength', 362), ('Stamina', 294), ('Durability', 262), ('Super Speed', 251), ('Agility', 244)]
+    [('Super Strength', 350), ('Stamina', 281), ('Durability', 251), ('Super Speed', 241), ('Agility', 235)]
 
 
 
@@ -1324,7 +1285,7 @@ marvel_top_5 = top_5_powers(marvel_df)
 print(marvel_top_5)
 ```
 
-    [('Super Strength', 204), ('Durability', 154), ('Stamina', 150), ('Super Speed', 137), ('Agility', 126)]
+    [('Super Strength', 199), ('Durability', 148), ('Stamina', 145), ('Super Speed', 132), ('Agility', 121)]
 
 
 
@@ -1333,7 +1294,7 @@ dc_top_5 = top_5_powers(dc_df)
 print(dc_top_5)
 ```
 
-    [('Super Strength', 109), ('Stamina', 90), ('Flight', 86), ('Super Speed', 79), ('Agility', 71)]
+    [('Super Strength', 103), ('Flight', 83), ('Stamina', 83), ('Super Speed', 75), ('Agility', 68)]
 
 
 
@@ -1359,23 +1320,11 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 ```
 
 
-    <matplotlib.figure.Figure at 0x26ee99aaac8>
+    <Figure size 432x288 with 0 Axes>
 
 
 
-![png](index_files/index_34_1.png)
-
-
-
-    None
-
-
-
-    <matplotlib.figure.Figure at 0x26ee99b42e8>
-
-
-
-![png](index_files/index_34_4.png)
+![png](index_files/index_35_1.png)
 
 
 
@@ -1383,11 +1332,23 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 
 
 
-    <matplotlib.figure.Figure at 0x26ee9a6fa58>
+    <Figure size 432x288 with 0 Axes>
 
 
 
-![png](index_files/index_34_7.png)
+![png](index_files/index_35_4.png)
+
+
+
+    None
+
+
+
+    <Figure size 432x288 with 0 Axes>
+
+
+
+![png](index_files/index_35_7.png)
 
 
 Analyze the results you found above to answer the following question:
