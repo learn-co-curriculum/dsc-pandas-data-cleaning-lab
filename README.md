@@ -351,11 +351,6 @@ Our DataFrame provided row indices by default, so this column is not needed.  Dr
 
 
 ```python
-
-```
-
-
-```python
 # __SOLUTION__ 
 heroes_df.drop("Unnamed: 0", axis=1, inplace=True)
 heroes_df.head()
@@ -476,11 +471,6 @@ The first step in our Exploratory Data Analysis will be to get familiar with the
 * Getting a feel for what information it does and doesn't contain
 
 In the cell below, get the descriptive statistics of each DataFrame.  
-
-
-```python
-
-```
 
 
 ```python
@@ -723,11 +713,6 @@ ________________________________________________________________________________
 
 
 ```python
-
-```
-
-
-```python
 # __SOLUTION__ 
 heroes_df.isna().any()
 ```
@@ -751,11 +736,6 @@ heroes_df.isna().any()
 
 
 ```python
-
-```
-
-
-```python
 # __SOLUTION__ 
 heroes_df.isna().sum()
 ```
@@ -776,11 +756,6 @@ heroes_df.isna().sum()
     dtype: int64
 
 
-
-
-```python
-
-```
 
 
 ```python
@@ -891,11 +866,6 @@ powers_df.isna().any()
 
 
 ```python
-
-```
-
-
-```python
 # __SOLUTION__ 
 # Let's check if any of these are True, rather than reading them all, by 
 # just chaining another call to .any()
@@ -908,16 +878,6 @@ powers_df.isna().any().any()
     False
 
 
-
-
-```python
-
-```
-
-
-```python
-
-```
 
 
 ```python
@@ -934,11 +894,6 @@ In the cell below, subset male and female heroes into different dataframes.  Cre
 ```python
 # __SOLUTION__ 
 powers_df.rename(columns={'hero_names':'name'}, inplace=True)
-```
-
-
-```python
-
 ```
 
 
@@ -1194,7 +1149,7 @@ female_heroes_df.plot.scatter(x="Height", y="Weight", c="c", label="Female", ax=
 
 
 
-![png](index_files/index_34_1.png)
+![png](index_files/index_25_1.png)
 
 
 
@@ -1240,14 +1195,14 @@ print("Median height for male heroes: {}".format(male_heroes_df.Height.median())
 ```
 
 
-![png](index_files/index_39_0.png)
+![png](index_files/index_30_0.png)
 
 
     Mean height for male heroes: 109.11201629327903
     Median height for male heroes: 180.0
 
 
-Discuss your findings from the plots above, with respect to the distribution of height and weight by gender.  Your explanation should include discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
+Discuss your findings from the plots above, with respect to the distribution of height and weight by gender.  Your explanation should include a discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
 
 Write your answer below this line:
 ____________________________________________________________________________________________________________________________
@@ -1264,7 +1219,7 @@ print("Median weight for male heroes: {}".format(male_heroes_df.Weight.median())
 ```
 
 
-![png](index_files/index_41_0.png)
+![png](index_files/index_32_0.png)
 
 
     Mean weight for male heroes: 53.519053342681936
@@ -1289,17 +1244,12 @@ print("Median height for female heroes: {}".format(female_heroes_df.Height.media
 ```
 
 
-![png](index_files/index_43_0.png)
+![png](index_files/index_34_0.png)
 
 
     Mean height for female heroes: 97.99234693877551
     Median height for female heroes: 168.0
 
-
-
-```python
-
-```
 
 
 ```python
@@ -1311,22 +1261,12 @@ print("Median weight for female heroes: {}".format(male_heroes_df.Weight.median(
 ```
 
 
-![png](index_files/index_45_0.png)
+![png](index_files/index_35_0.png)
 
 
     Mean weight for female heroes: 27.433673469387756
     Median weight for female heroes: 79.0
 
-
-
-```python
-
-```
-
-
-```python
-
-```
 
 
 ```python
@@ -1348,11 +1288,6 @@ print(heroes_df[heroes_df.Weight < 0].Weight.value_counts())
 
 
 ```python
-
-```
-
-
-```python
 # __SOLUTION__ 
 for feat in ['Height', 'Weight']:
     df = heroes_and_powers_df[heroes_and_powers_df[feat]>0] #Temporarily remove negatives
@@ -1363,7 +1298,7 @@ for feat in ['Height', 'Weight']:
 ```
 
 
-![png](index_files/index_50_0.png)
+![png](index_files/index_37_0.png)
 
 
     Mean Height for Male heroes: 192.62314540059347
@@ -1371,7 +1306,7 @@ for feat in ['Height', 'Weight']:
 
 
 
-![png](index_files/index_50_2.png)
+![png](index_files/index_37_2.png)
 
 
     Mean Height for Female heroes: 174.90671641791045
@@ -1379,7 +1314,7 @@ for feat in ['Height', 'Weight']:
 
 
 
-![png](index_files/index_50_4.png)
+![png](index_files/index_37_4.png)
 
 
     Mean Weight for Male heroes: 126.84594103842267
@@ -1387,7 +1322,7 @@ for feat in ['Height', 'Weight']:
 
 
 
-![png](index_files/index_50_6.png)
+![png](index_files/index_37_6.png)
 
 
     Mean Weight for Female heroes: 80.34848484848484
@@ -1398,7 +1333,7 @@ Analyze the results you found above to answer the following question:
 
 How do the top 5 powers in the Marvel and DC universes compare?  Are they similar, or are there significant differences? How do they compare to the overall trends in the entire Superheroes dataset?
 
-Wite your answer below this line:
+Write your answer below this line:
 ____________________________________________________________________________________________________________________________
 
 
@@ -1426,16 +1361,6 @@ Be sure to include thoughtful, well-labeled visualizations to back up your analy
 
 
 ```python
-
-```
-
-
-```python
-
-```
-
-
-```python
 # __SOLUTION__ 
 def top_5_powers(dataframe):
     df = dataframe.drop(heroes_df.columns.values[1:], axis=1)
@@ -1458,11 +1383,6 @@ print(overall_top_5)
 
 
 ```python
-
-```
-
-
-```python
 # __SOLUTION__ 
 marvel_top_5 = top_5_powers(marvel_df)
 print(marvel_top_5)
@@ -1473,11 +1393,6 @@ print(marvel_top_5)
 
 
 ```python
-
-```
-
-
-```python
 # __SOLUTION__ 
 dc_top_5 = top_5_powers(dc_df)
 print(dc_top_5)
@@ -1485,11 +1400,6 @@ print(dc_top_5)
 
     [('Super Strength', 103), ('Flight', 83), ('Stamina', 83), ('Super Speed', 75), ('Agility', 68)]
 
-
-
-```python
-
-```
 
 
 ```python
@@ -1519,7 +1429,7 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 
 
 
-![png](index_files/index_60_1.png)
+![png](index_files/index_42_1.png)
 
 
 
@@ -1531,7 +1441,7 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 
 
 
-![png](index_files/index_60_4.png)
+![png](index_files/index_42_4.png)
 
 
 
@@ -1543,13 +1453,8 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 
 
 
-![png](index_files/index_60_7.png)
+![png](index_files/index_42_7.png)
 
-
-
-```python
-
-```
 
 ## Summary
 
