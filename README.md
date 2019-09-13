@@ -49,11 +49,6 @@ It looks as if the heroes information dataset contained an index column.  We did
 
 Our DataFrame provided row indices by default, so this column is not needed.  Drop it from the DataFrame in place in the cell below, and then display the head of `heroes_df` to ensure that it worked properly. 
 
-
-```python
-
-```
-
 ## Familiarize Yourself With the Dataset
 
 The first step in our Exploratory Data Analysis will be to get familiar with the data.  This step includes:
@@ -64,11 +59,6 @@ The first step in our Exploratory Data Analysis will be to get familiar with the
 * Getting a feel for what information it does and doesn't contain
 
 In the cell below, get the descriptive statistics of each DataFrame.  
-
-
-```python
-
-```
 
 ## Dealing with Null Values
 
@@ -85,21 +75,6 @@ ________________________________________________________________________________
 
 
 
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
 ## Joining, Grouping, and Aggregating
 
 In the cell below, join the two DataFrames.  Think about which sort of join you should use, as well as which columns you should join on.  Rename columns and manipulate as needed.  
@@ -108,27 +83,7 @@ In the cell below, join the two DataFrames.  Think about which sort of join you 
 
 **_HINT:_** If the join throws an error message, consider setting the column you want to join on as the index for each DataFrame.  
 
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
 In the cell below, subset male and female heroes into different dataframes.  Create a scatterplot of the height and weight of each hero, with weight as the y-axis.  Plot both the male and female heroes subset into each dataframe, and make the color for each point in the scatterplot correspond to the gender of the superhero.
-
-
-```python
-
-```
 
 ## Some Initial Investigation
 
@@ -174,7 +129,7 @@ def show_distplot(dataframe, gender, column_name):
 
 ```
 
-Discuss your findings from the plots above, with respect to the distribution of height and weight by gender.  Your explanation should include discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
+Discuss your findings from the plots above, with respect to the distribution of height and weight by gender.  Your explanation should include a discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
 
 Write your answer below this line:
 ____________________________________________________________________________________________________________________________
@@ -189,31 +144,11 @@ The rest of this notebook will be left to you to investigate the dataset by form
 * What are the 5 most common powers in the Marvel Universe?
 * What are the 5 most common powers in the DC Universe?
 
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
 Analyze the results you found above to answer the following question:
 
 How do the top 5 powers in the Marvel and DC universes compare?  Are they similar, or are there significant differences? How do they compare to the overall trends in the entire Superheroes dataset?
 
-Wite your answer below this line:
+Write your answer below this line:
 ____________________________________________________________________________________________________________________________
 
 
@@ -238,36 +173,6 @@ Some sample cells have been provided to give you room to work. If you need to cr
 1. Pressing `b` to add a cell below the currently highlighted cell, or `a` to add one above it.  
 
 Be sure to include thoughtful, well-labeled visualizations to back up your analysis!
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
 
 ## Summary
 
