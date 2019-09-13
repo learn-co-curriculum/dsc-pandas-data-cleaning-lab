@@ -1,18 +1,22 @@
 
-# Pandas Summative Lab
+# Project - Data Cleaning
 
 ## Introduction
 In this lab, we'll make use of everything we've learned about pandas, data cleaning, and Exploratory Data Analysis. In order to complete this lab, you'll have to make import, clean, combine, reshape, and visualize data to answer questions provided, as well as your own questions!
 
-### The Dataset
+## Objectives
+You will be able to:
+* Show mastery of the content covered in this section
+
+## The Dataset
 In this lab, we'll work with the comprehensive [Super Heroes Dataset](https://www.kaggle.com/claudiodavi/superhero-set/data), which can be found on Kaggle!
 
-### Objectives
+## Goals
 * Use all available pandas knowledge to clean the dataset and deal with null values
 * Use Queries and aggregations to group the data into interesting subsets as needed
 * Use descriptive statistics and data visualization to find answers to questions we may have about the data. 
 
-### Getting Started
+## Getting Started
 
 In the cell below:
 
@@ -439,7 +443,7 @@ heroes_df.head()
 
 
 
-### Familiarize Yourself With the Dataset
+## Familiarize Yourself With the Dataset
 
 The first step in our Exploratory Data Analysis will be to get familiar with the data.  This step includes:
 
@@ -673,7 +677,7 @@ powers_df.describe()
 
 
 
-### Dealing with Null Values
+## Dealing with Null Values
 
 Starting in the cell below, detect and deal with any null values in either data frame.  Then, explain your methodology for detecting and dealing with outliers in the markdown section below.  Be sure to explain your strategy for dealing with null values in numeric columns, as well as your strategy for dealing with null values in non-numeric columns.  
 
@@ -685,7 +689,7 @@ Note that if you need to add more cells to write code in, you can do this by:
 Describe your strategy below this line:
 ____________________________________________________________________________________________________________________________
 
-The `Weight` and `Publisher` columns contain null values.  Student should replace null values in `Weight` column with mean or median value for this column.  Since `Publisher` is a categorical column, having null values here is not necessarily a blocking problem.  We can either remove those rows (not desirable, because those rows might be interesting, and we should never throw away data when we can help it), we can leave them as is, or, since it is only 15 values, we could always look it up manually and fill in the correct values.  This is not expected for this lab, but would be a good solution if this data was important in a real-world project.   
+
 
 
 
@@ -755,6 +759,14 @@ heroes_df.isna().sum()
     dtype: int64
 
 
+
+## Joining, Grouping, and Aggregating
+
+In the cell below, join the two DataFrames.  Think about which sort of join you should use, as well as which columns you should join on.  Rename columns and manipulate as needed.  
+
+**_HINT:_** Consider the possibility that the columns you choose to join on contain duplicate entries. If that is the case, devise a strategy to deal with the duplicates.
+
+**_HINT:_** If the join throws an error message, consider setting the column you want to join on as the index for each DataFrame.  
 
 
 ```python
@@ -843,14 +855,6 @@ powers_df.isna().any().any()
 
 
 
-### Joining, Grouping, and Aggregating
-
-In the cell below, join the two DataFrames.  Think about which sort of join you should use, as well as which columns you should join on.  Rename columns and manipulate as needed.  
-
-**_HINT:_** Consider the possibility that the columns you choose to join on contain duplicate entries. If that is the case, devise a strategy to deal with the duplicates.
-
-**_HINT:_** If the join throws an error message, consider setting the column you want to join on as the index for each DataFrame.  
-
 
 ```python
 # Drop duplicate names
@@ -858,6 +862,8 @@ heroes_df.drop_duplicates(subset="name", inplace=True)
 # Reset index values
 heroes_df.reset_index(drop=True, inplace=True)
 ```
+
+In the cell below, subset male and female heroes into different dataframes.  Create a scatterplot of the height and weight of each hero, with weight as the y-axis.  Plot both the male and female heroes subset into each dataframe, and make the color for each point in the scatterplot correspond to the gender of the superhero.
 
 
 ```python
@@ -868,6 +874,17 @@ powers_df.rename(columns={'hero_names':'name'}, inplace=True)
 ```python
 powers_df  = powers_df.astype('str')
 ```
+
+## Some Initial Investigation
+
+Next, slice the DataFrame as needed and visualize the distribution of heights and weights by gender.  You should have 4 total plots.  
+
+In the cell below:
+
+* Slice the DataFrame into separate DataFrames by gender
+* Complete the `show_distplot` function.  This helper function should take in a DataFrame, a string containing the gender we want to visualize, and the column name we want to visualize by gender. The function should display a distplot visualization from seaborn of the column/gender combination.  
+
+Hint: Don't forget to check the [seaborn documentation for distplot](https://seaborn.pydata.org/generated/seaborn.distplot.html) if you have questions about how to use it correctly! 
 
 
 ```python
@@ -1071,8 +1088,6 @@ heroes_and_powers_df.head()
 
 
 
-In the cell below, subset male and female heroes into different dataframes.  Create a scatterplot of the height and weight of each hero, with weight as the y-axis.  Plot both the male and female heroes subset into each dataframe, and make the color for each point in the scatterplot correspond to the gender of the superhero.
-
 
 ```python
 male_heroes_df = heroes_df[heroes_df['Gender'] == 'Male']
@@ -1090,19 +1105,8 @@ female_heroes_df.plot.scatter(x="Height", y="Weight", c="c", label="Female", ax=
 
 
 
-![png](index_files/index_20_1.png)
+![png](index_files/index_21_1.png)
 
-
-## Some Initial Investigation
-
-Next, slice the DataFrame as needed and visualize the distribution of heights and weights by gender.  You should have 4 total plots.  
-
-In the cell below:
-
-* Slice the DataFrame into separate DataFrames by gender
-* Complete the `show_distplot` function.  This helper function should take in a DataFrame, a string containing the gender we want to visualize, and the column name we want to visualize by gender. The function should display a distplot visualization from seaborn of the column/gender combination.  
-
-Hint: Don't forget to check the [seaborn documentation for distplot](https://seaborn.pydata.org/generated/seaborn.distplot.html) if you have questions about how to use it correctly! 
 
 
 ```python
@@ -1134,6 +1138,13 @@ print("Median height for male heroes: {}".format(male_heroes_df.Height.median())
     Median height for male heroes: 180.0
 
 
+Discuss your findings from the plots above, with respect to the distribution of height and weight by gender.  Your explanation should include a discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
+
+Write your answer below this line:
+____________________________________________________________________________________________________________________________
+
+
+
 
 ```python
 # Male Weight
@@ -1143,12 +1154,20 @@ print("Median weight for male heroes: {}".format(male_heroes_df.Weight.median())
 ```
 
 
-![png](index_files/index_24_0.png)
+![png](index_files/index_25_0.png)
 
 
     Mean weight for male heroes: 53.519053342681936
     Median weight for male heroes: 79.0
 
+
+### Sample Question: Most Common Powers
+
+The rest of this notebook will be left to you to investigate the dataset by formulating your own questions, and then seeking answers using pandas and numpy.  Every answer should include some sort of visualization, when appropriate. Before moving on to formulating your own questions, use the dataset to answer the following questions about superhero powers:
+
+* What are the 5 most common powers overall?
+* What are the 5 most common powers in the Marvel Universe?
+* What are the 5 most common powers in the DC Universe?
 
 
 ```python
@@ -1159,7 +1178,7 @@ print("Median height for female heroes: {}".format(female_heroes_df.Height.media
 ```
 
 
-![png](index_files/index_25_0.png)
+![png](index_files/index_27_0.png)
 
 
     Mean height for female heroes: 97.99234693877551
@@ -1175,19 +1194,12 @@ print("Median weight for female heroes: {}".format(male_heroes_df.Weight.median(
 ```
 
 
-![png](index_files/index_26_0.png)
+![png](index_files/index_28_0.png)
 
 
     Mean weight for female heroes: 27.433673469387756
     Median weight for female heroes: 79.0
 
-
-Discuss your findings from the plots above, with respect to the distribution of height and weight by gender.  Your explanation should include discussion of any relevant summary statistics, including mean, median, mode, and the overall shape of each distribution.  
-
-Write your answer below this line:
-____________________________________________________________________________________________________________________________
-
-Ideally, students should comment on the outliers that fall below 0 for the height and weight. Further investigation demonstrates that all heights and weights below zero are set to -99, which suggests that these may have originally been missing values which were filled with an erroneous value. This investigation and subsequent plots with these values removed is demonstrated below.
 
 
 ```python
@@ -1217,7 +1229,7 @@ for feat in ['Height', 'Weight']:
 ```
 
 
-![png](index_files/index_29_0.png)
+![png](index_files/index_30_0.png)
 
 
     Mean Height for Male heroes: 192.62314540059347
@@ -1225,7 +1237,7 @@ for feat in ['Height', 'Weight']:
 
 
 
-![png](index_files/index_29_2.png)
+![png](index_files/index_30_2.png)
 
 
     Mean Height for Female heroes: 174.90671641791045
@@ -1233,7 +1245,7 @@ for feat in ['Height', 'Weight']:
 
 
 
-![png](index_files/index_29_4.png)
+![png](index_files/index_30_4.png)
 
 
     Mean Weight for Male heroes: 126.84594103842267
@@ -1241,22 +1253,42 @@ for feat in ['Height', 'Weight']:
 
 
 
-![png](index_files/index_29_6.png)
+![png](index_files/index_30_6.png)
 
 
     Mean Weight for Female heroes: 80.34848484848484
     Median Weight for Female heroes: 57.5
 
 
-Final comment: all distributions now display a normal distribution, as would be expected for heights and weights of a random population.
+Analyze the results you found above to answer the following question:
 
-### Sample Question: Most Common Powers
+How do the top 5 powers in the Marvel and DC universes compare?  Are they similar, or are there significant differences? How do they compare to the overall trends in the entire Superheroes dataset?
 
-The rest of this notebook will be left to you to investigate the dataset by formulating your own questions, and then seeking answers using pandas and numpy.  Every answer should include some sort of visualization, when appropriate. Before moving on to formulating your own questions, use the dataset to answer the following questions about superhero powers:
+Write your answer below this line:
+____________________________________________________________________________________________________________________________
 
-* What are the 5 most common powers overall?
-* What are the 5 most common powers in the Marvel Universe?
-* What are the 5 most common powers in the DC Universe?
+
+### Your Own Investigation
+
+For the remainder of this lab, you'll be focusing on coming up with and answering your own question, just like we did above.  Your question should not be overly simple, and should require both descriptive statistics and data visualization to answer.  In case you're unsure of what questions to ask, some sample questions have been provided below.
+
+Pick one of the following questions to investigate and answer, or come up with one of your own!
+
+* Which powers have the highest chance of co-occurring in a hero (e.g. super strength and flight), and does this differ by gender?
+* Is there a relationship between a hero's height and weight and their powerset?
+* What is the distribution of skin colors amongst alien heroes?
+
+Explain your question below this line:
+____________________________________________________________________________________________________________________________
+
+
+
+Some sample cells have been provided to give you room to work. If you need to create more cells, you can do this easily by:
+
+1. Highlighting a cell and then pressing `esc` to enter command mode.
+1. Pressing `b` to add a cell below the currently highlighted cell, or `a` to add one above it.  
+
+Be sure to include thoughtful, well-labeled visualizations to back up your analysis!
 
 
 ```python
@@ -1351,39 +1383,9 @@ top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
 ![png](index_files/index_35_7.png)
 
 
-Analyze the results you found above to answer the following question:
-
-How do the top 5 powers in the Marvel and DC universes compare?  Are they similar, or are there significant differences? How do they compare to the overall trends in the entire Superheroes dataset?
-
-Wite your answer below this line:
-____________________________________________________________________________________________________________________________
-
-
-### Your Own Investigation
-
-For the remainder of this lab, you'll be focusing on coming up with and answering your own question, just like we did above.  Your question should not be overly simple, and should require both descriptive statistics and data visualization to answer.  In case you're unsure of what questions to ask, some sample questions have been provided below.
-
-Pick one of the following questions to investigate and answer, or come up with one of your own!
-
-* Which powers have the highest chance of co-occurring in a hero (e.g. super strength and flight), and does this differ by gender?
-* Is there a relationship between a hero's height and weight and their powerset?
-* What is the distribution of skin colors amongst alien heroes?
-
-Explain your question below this line:
-____________________________________________________________________________________________________________________________
-
-
-
-Some sample cells have been provided to give you room to work. If you need to create more cells, you can do this easily by:
-
-1. Highlighting a cell and then pressing `esc` to enter command mode.
-1. Pressing `b` to add a cell below the currently highlighted cell, or `a` to add one above it.  
-
-Be sure to include thoughtful, well-labeled visualizations to back up your analysis!
-
-# Conclusion
+## Summary
 
 In this lab, we demonstrated our mastery of:
-* Use all available pandas knowledge to clean the dataset and deal with null values
-* Use Queries and aggregations to group the data into interesting subsets as needed
-* Use descriptive statistics and data visualization to find answers to questions we may have about the data.
+* Using all of our Pandas knowledge to date to clean the dataset and deal with null values
+* Using Queries and aggregations to group the data into interesting subsets as needed
+* Using descriptive statistics and data visualization to find answers to questions we may have about the data
