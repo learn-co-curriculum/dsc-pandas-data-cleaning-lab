@@ -2,19 +2,19 @@
 # Project - Data Cleaning
 
 ## Introduction
-In this lab, we'll make use of everything we've learned about pandas, data cleaning, and Exploratory Data Analysis. In order to complete this lab, you'll have to make import, clean, combine, reshape, and visualize data to answer questions provided, as well as your own questions!
+In this lab, we'll make use of everything we've learned about pandas, data cleaning, and exploratory data analysis. In order to complete this lab, you'll have to import, clean, combine, reshape, and visualize data to answer questions provided, as well as your own questions!
 
 ## Objectives
 You will be able to:
-* Show mastery of the content covered in this section
+- Use different types of joins to merge DataFrames 
+- Identify missing values in a dataframe using built-in methods 
+- Evaluate and execute the best strategy for dealing with missing, duplicate, and erroneous values for a given dataset 
+- Inspect data for duplicates or extraneous values and remove them 
 
-## The Dataset
+
+## The dataset
 In this lab, we'll work with the comprehensive [Super Heroes Dataset](https://www.kaggle.com/claudiodavi/superhero-set/data), which can be found on Kaggle!
 
-## Goals
-* Use all available pandas knowledge to clean the dataset and deal with null values
-* Use Queries and aggregations to group the data into interesting subsets as needed
-* Use descriptive statistics and data visualization to find answers to questions we may have about the data. 
 
 ## Getting Started
 
@@ -35,9 +35,9 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-For this lab, our dataset is split among two different sources--`heroes_information.csv` and `super_hero_powers.csv`.
+For this lab, our dataset is split among two different sources -- `'heroes_information.csv'` and `'super_hero_powers.csv'`.
 
-Use pandas to read in each file and store them in DataFrames in the appropriate variables below. Then, display the head of each to ensure that everything loaded correctly.  
+Use pandas to read in each file and store them in DataFrames in the appropriate variables below. Then, display the `.head()` of each to ensure that everything loaded correctly.  
 
 
 ```python
@@ -334,7 +334,7 @@ Our DataFrame provided row indices by default, so this column is not needed.  Dr
 
 
 ```python
-heroes_df.drop("Unnamed: 0", axis=1, inplace=True)
+heroes_df.drop('Unnamed: 0', axis=1, inplace=True)
 heroes_df.head()
 ```
 
@@ -443,7 +443,7 @@ heroes_df.head()
 
 
 
-## Familiarize Yourself With the Dataset
+## Familiarize yourself with the dataset
 
 The first step in our Exploratory Data Analysis will be to get familiar with the data.  This step includes:
 
@@ -677,9 +677,9 @@ powers_df.describe()
 
 
 
-## Dealing with Null Values
+## Dealing with missing values
 
-Starting in the cell below, detect and deal with any null values in either data frame.  Then, explain your methodology for detecting and dealing with outliers in the markdown section below.  Be sure to explain your strategy for dealing with null values in numeric columns, as well as your strategy for dealing with null values in non-numeric columns.  
+Starting in the cell below, detect and deal with any missing values in either DataFrame. Then, explain your methodology for detecting and dealing with outliers in the markdown section below. Be sure to explain your strategy for dealing with missing values in numeric columns, as well as your strategy for dealing with missing values in non-numeric columns.  
 
 Note that if you need to add more cells to write code in, you can do this by:
 
@@ -738,7 +738,7 @@ heroes_df.isna().sum()
 
 
 ```python
-mean_weight = heroes_df.Weight.mean()
+mean_weight = heroes_df['Weight'].mean()
 heroes_df['Weight'].fillna(mean_weight, inplace=True)
 heroes_df.isna().sum()
 ```
@@ -858,7 +858,7 @@ powers_df.isna().any().any()
 
 ```python
 # Drop duplicate names
-heroes_df.drop_duplicates(subset="name", inplace=True)
+heroes_df.drop_duplicates(subset='name', inplace=True)
 # Reset index values
 heroes_df.reset_index(drop=True, inplace=True)
 ```
@@ -875,6 +875,12 @@ powers_df.rename(columns={'hero_names':'name'}, inplace=True)
 powers_df  = powers_df.astype('str')
 ```
 
+
+```python
+heroes_and_powers_df = powers_df.set_index('name').join(heroes_df.set_index('name'), how='inner')
+heroes_and_powers_df.head()
+```
+
 ## Some Initial Investigation
 
 Next, slice the DataFrame as needed and visualize the distribution of heights and weights by gender.  You should have 4 total plots.  
@@ -882,219 +888,17 @@ Next, slice the DataFrame as needed and visualize the distribution of heights an
 In the cell below:
 
 * Slice the DataFrame into separate DataFrames by gender
-* Complete the `show_distplot` function.  This helper function should take in a DataFrame, a string containing the gender we want to visualize, and the column name we want to visualize by gender. The function should display a distplot visualization from seaborn of the column/gender combination.  
+* Complete the `show_distplot()` function.  This helper function should take in a DataFrame, a string containing the gender we want to visualize, and the column name we want to visualize by gender. The function should display a distplot visualization from seaborn of the column/gender combination.  
 
 Hint: Don't forget to check the [seaborn documentation for distplot](https://seaborn.pydata.org/generated/seaborn.distplot.html) if you have questions about how to use it correctly! 
-
-
-```python
-heroes_and_powers_df = powers_df.set_index('name').join(heroes_df.set_index('name'), how='inner')
-heroes_and_powers_df.head()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Agility</th>
-      <th>Accelerated Healing</th>
-      <th>Lantern Power Ring</th>
-      <th>Dimensional Awareness</th>
-      <th>Cold Resistance</th>
-      <th>Durability</th>
-      <th>Stealth</th>
-      <th>Energy Absorption</th>
-      <th>Flight</th>
-      <th>Danger Sense</th>
-      <th>...</th>
-      <th>Omniscient</th>
-      <th>Gender</th>
-      <th>Eye color</th>
-      <th>Race</th>
-      <th>Hair color</th>
-      <th>Height</th>
-      <th>Publisher</th>
-      <th>Skin color</th>
-      <th>Alignment</th>
-      <th>Weight</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>A-Bomb</th>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>...</td>
-      <td>False</td>
-      <td>Male</td>
-      <td>yellow</td>
-      <td>Human</td>
-      <td>No Hair</td>
-      <td>203.0</td>
-      <td>Marvel Comics</td>
-      <td>-</td>
-      <td>good</td>
-      <td>441.0</td>
-    </tr>
-    <tr>
-      <th>Abe Sapien</th>
-      <td>True</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>...</td>
-      <td>False</td>
-      <td>Male</td>
-      <td>blue</td>
-      <td>Icthyo Sapien</td>
-      <td>No Hair</td>
-      <td>191.0</td>
-      <td>Dark Horse Comics</td>
-      <td>blue</td>
-      <td>good</td>
-      <td>65.0</td>
-    </tr>
-    <tr>
-      <th>Abin Sur</th>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>...</td>
-      <td>False</td>
-      <td>Male</td>
-      <td>blue</td>
-      <td>Ungaran</td>
-      <td>No Hair</td>
-      <td>185.0</td>
-      <td>DC Comics</td>
-      <td>red</td>
-      <td>good</td>
-      <td>90.0</td>
-    </tr>
-    <tr>
-      <th>Abomination</th>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>...</td>
-      <td>False</td>
-      <td>Male</td>
-      <td>green</td>
-      <td>Human / Radiation</td>
-      <td>No Hair</td>
-      <td>203.0</td>
-      <td>Marvel Comics</td>
-      <td>-</td>
-      <td>bad</td>
-      <td>441.0</td>
-    </tr>
-    <tr>
-      <th>Abraxas</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>...</td>
-      <td>False</td>
-      <td>Male</td>
-      <td>blue</td>
-      <td>Cosmic Entity</td>
-      <td>Black</td>
-      <td>-99.0</td>
-      <td>Marvel Comics</td>
-      <td>-</td>
-      <td>bad</td>
-      <td>-99.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 176 columns</p>
-</div>
-
-
 
 
 ```python
 male_heroes_df = heroes_df[heroes_df['Gender'] == 'Male']
 female_heroes_df = heroes_df[heroes_df['Gender'] == 'Female']
 
-ax = male_heroes_df.plot.scatter(x="Height", y="Weight", c="k", label="Male")
-female_heroes_df.plot.scatter(x="Height", y="Weight", c="c", label="Female", ax=ax)
+ax = male_heroes_df.plot.scatter(x='Height', y='Weight', c='k', label='Male')
+female_heroes_df.plot.scatter(x='Height', y='Weight', c='c', label='Female', ax=ax)
 ```
 
 
@@ -1116,9 +920,9 @@ female_heroes_df = heroes_df[heroes_df['Gender'] == 'Female']
 def show_distplot(dataframe, gender, column_name):
     plt.plot()
     dataframe[column_name].hist()
-    plt.title("Distribution of {} for {} heroes".format(column_name, gender))
+    plt.title('Distribution of {} for {} heroes'.format(column_name, gender))
     plt.xlabel(column_name)
-    plt.ylabel("Probability Density")
+    plt.ylabel('Probability Density')
     plt.show()
 ```
 
@@ -1126,8 +930,8 @@ def show_distplot(dataframe, gender, column_name):
 ```python
 # Male Height
 show_distplot(male_heroes_df, 'Male', 'Height')
-print("Mean height for male heroes: {}".format(male_heroes_df.Height.mean()))
-print("Median height for male heroes: {}".format(male_heroes_df.Height.median()))
+print('Mean height for male heroes: {}'.format(male_heroes_df.Height.mean()))
+print('Median height for male heroes: {}'.format(male_heroes_df.Height.median()))
 ```
 
 
@@ -1149,8 +953,8 @@ ________________________________________________________________________________
 ```python
 # Male Weight
 show_distplot(male_heroes_df, 'Male', 'Weight')
-print("Mean weight for male heroes: {}".format(male_heroes_df.Weight.mean()))
-print("Median weight for male heroes: {}".format(male_heroes_df.Weight.median()))
+print('Mean weight for male heroes: {}'.format(male_heroes_df.Weight.mean()))
+print('Median weight for male heroes: {}'.format(male_heroes_df.Weight.median()))
 ```
 
 
@@ -1173,8 +977,8 @@ The rest of this notebook will be left to you to investigate the dataset by form
 ```python
 # Female Height
 show_distplot(female_heroes_df, 'Female', 'Height')
-print("Mean height for female heroes: {}".format(female_heroes_df.Height.mean()))
-print("Median height for female heroes: {}".format(female_heroes_df.Height.median()))
+print('Mean height for female heroes: {}'.format(female_heroes_df.Height.mean()))
+print('Median height for female heroes: {}'.format(female_heroes_df.Height.median()))
 ```
 
 
@@ -1189,8 +993,8 @@ print("Median height for female heroes: {}".format(female_heroes_df.Height.media
 ```python
 # Female Weight
 show_distplot(female_heroes_df, 'Female', 'Weight')
-print("Mean weight for female heroes: {}".format(female_heroes_df.Weight.mean()))
-print("Median weight for female heroes: {}".format(male_heroes_df.Weight.median()))
+print('Mean weight for female heroes: {}'.format(female_heroes_df.Weight.mean()))
+print('Median weight for female heroes: {}'.format(male_heroes_df.Weight.median()))
 ```
 
 
@@ -1224,8 +1028,8 @@ for feat in ['Height', 'Weight']:
     df = heroes_and_powers_df[heroes_and_powers_df[feat]>0] #Temporarily remove negatives
     for group in ['Male', 'Female']:
         show_distplot(df[df['Gender']==group], group, feat)
-        print("Mean {} for {} heroes: {}".format(feat, group, df[df['Gender']==group][feat].mean()))
-        print("Median {} for {} heroes: {}".format(feat, group, df[df['Gender']==group][feat].median()))
+        print('Mean {} for {} heroes: {}'.format(feat, group, df[df['Gender']==group][feat].mean()))
+        print('Median {} for {} heroes: {}'.format(feat, group, df[df['Gender']==group][feat].median()))
 ```
 
 
@@ -1296,7 +1100,7 @@ def top_5_powers(dataframe):
     df = dataframe.drop(heroes_df.columns.values[1:], axis=1)
     columns = df.columns.values
     for col in columns:
-        df[col] = df[col].map({"True": 1, "False": 0})
+        df[col] = df[col].map({'True': 1, 'False': 0})
         
     power_counts_dict = dict(df.sum())
     
@@ -1341,14 +1145,14 @@ def top_5_bar_chart(top_5_list, publisher=None):
     plt.bar(bar_positions, marvel_values)
     plt.xticks(bar_positions, marvel_powers)
     if publisher:
-        plt.title("Top 5 Powers in {} Universe".format(publisher))
+        plt.title('Top 5 Powers in {} Universe'.format(publisher))
     else:
-        plt.title("Top 5 Powers in Superheroes Dataset")
+        plt.title('Top 5 Powers in Superheroes Dataset')
     plt.show()
 
 display(top_5_bar_chart(overall_top_5))
-display(top_5_bar_chart(dc_top_5, publisher="DC Comics"))
-top_5_bar_chart(marvel_top_5, publisher="Marvel Comics")
+display(top_5_bar_chart(dc_top_5, publisher='DC Comics'))
+top_5_bar_chart(marvel_top_5, publisher='Marvel Comics')
 ```
 
 
