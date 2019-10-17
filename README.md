@@ -2,19 +2,19 @@
 # Project - Data Cleaning
 
 ## Introduction
-In this lab, we'll make use of everything we've learned about pandas, data cleaning, and Exploratory Data Analysis. In order to complete this lab, you'll have to make import, clean, combine, reshape, and visualize data to answer questions provided, as well as your own questions!
+In this lab, we'll make use of everything we've learned about pandas, data cleaning, and exploratory data analysis. In order to complete this lab, you'll have to import, clean, combine, reshape, and visualize data to answer questions provided, as well as your own questions!
 
 ## Objectives
 You will be able to:
-* Show mastery of the content covered in this section
+- Use different types of joins to merge DataFrames 
+- Identify missing values in a dataframe using built-in methods 
+- Evaluate and execute the best strategy for dealing with missing, duplicate, and erroneous values for a given dataset 
+- Inspect data for duplicates or extraneous values and remove them 
 
-## The Dataset
+
+## The dataset
 In this lab, we'll work with the comprehensive [Super Heroes Dataset](https://www.kaggle.com/claudiodavi/superhero-set/data), which can be found on Kaggle!
 
-## Goals
-* Use all available pandas knowledge to clean the dataset and deal with null values
-* Use Queries and aggregations to group the data into interesting subsets as needed
-* Use descriptive statistics and data visualization to find answers to questions we may have about the data. 
 
 ## Getting Started
 
@@ -35,9 +35,9 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-For this lab, our dataset is split among two different sources--`heroes_information.csv` and `super_hero_powers.csv`.
+For this lab, our dataset is split among two different sources -- `'heroes_information.csv'` and `'super_hero_powers.csv'`.
 
-Use pandas to read in each file and store them in DataFrames in the appropriate variables below. Then, display the head of each to ensure that everything loaded correctly.  
+Use pandas to read in each file and store them in DataFrames in the appropriate variables below. Then, display the `.head()` of each to ensure that everything loaded correctly.  
 
 
 ```python
@@ -49,7 +49,12 @@ It looks as if the heroes information dataset contained an index column.  We did
 
 Our DataFrame provided row indices by default, so this column is not needed.  Drop it from the DataFrame in place in the cell below, and then display the head of `heroes_df` to ensure that it worked properly. 
 
-## Familiarize Yourself With the Dataset
+
+```python
+
+```
+
+## Familiarize yourself with the dataset
 
 The first step in our Exploratory Data Analysis will be to get familiar with the data.  This step includes:
 
@@ -60,9 +65,14 @@ The first step in our Exploratory Data Analysis will be to get familiar with the
 
 In the cell below, get the descriptive statistics of each DataFrame.  
 
-## Dealing with Null Values
 
-Starting in the cell below, detect and deal with any null values in either data frame.  Then, explain your methodology for detecting and dealing with outliers in the markdown section below.  Be sure to explain your strategy for dealing with null values in numeric columns, as well as your strategy for dealing with null values in non-numeric columns.  
+```python
+
+```
+
+## Dealing with missing values
+
+Starting in the cell below, detect and deal with any missing values in either DataFrame. Then, explain your methodology for detecting and dealing with outliers in the markdown section below. Be sure to explain your strategy for dealing with missing values in numeric columns, as well as your strategy for dealing with missing values in non-numeric columns.  
 
 Note that if you need to add more cells to write code in, you can do this by:
 
@@ -75,6 +85,21 @@ ________________________________________________________________________________
 
 
 
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
 ## Joining, Grouping, and Aggregating
 
 In the cell below, join the two DataFrames.  Think about which sort of join you should use, as well as which columns you should join on.  Rename columns and manipulate as needed.  
@@ -83,7 +108,27 @@ In the cell below, join the two DataFrames.  Think about which sort of join you 
 
 **_HINT:_** If the join throws an error message, consider setting the column you want to join on as the index for each DataFrame.  
 
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
 In the cell below, subset male and female heroes into different dataframes.  Create a scatterplot of the height and weight of each hero, with weight as the y-axis.  Plot both the male and female heroes subset into each dataframe, and make the color for each point in the scatterplot correspond to the gender of the superhero.
+
+
+```python
+
+```
 
 ## Some Initial Investigation
 
@@ -92,7 +137,7 @@ Next, slice the DataFrame as needed and visualize the distribution of heights an
 In the cell below:
 
 * Slice the DataFrame into separate DataFrames by gender
-* Complete the `show_distplot` function.  This helper function should take in a DataFrame, a string containing the gender we want to visualize, and the column name we want to visualize by gender. The function should display a distplot visualization from seaborn of the column/gender combination.  
+* Complete the `show_distplot()` function.  This helper function should take in a DataFrame, a string containing the gender we want to visualize, and the column name we want to visualize by gender. The function should display a distplot visualization from seaborn of the column/gender combination.  
 
 Hint: Don't forget to check the [seaborn documentation for distplot](https://seaborn.pydata.org/generated/seaborn.distplot.html) if you have questions about how to use it correctly! 
 
@@ -144,6 +189,26 @@ The rest of this notebook will be left to you to investigate the dataset by form
 * What are the 5 most common powers in the Marvel Universe?
 * What are the 5 most common powers in the DC Universe?
 
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
 Analyze the results you found above to answer the following question:
 
 How do the top 5 powers in the Marvel and DC universes compare?  Are they similar, or are there significant differences? How do they compare to the overall trends in the entire Superheroes dataset?
@@ -173,6 +238,36 @@ Some sample cells have been provided to give you room to work. If you need to cr
 1. Pressing `b` to add a cell below the currently highlighted cell, or `a` to add one above it.  
 
 Be sure to include thoughtful, well-labeled visualizations to back up your analysis!
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
 
 ## Summary
 
