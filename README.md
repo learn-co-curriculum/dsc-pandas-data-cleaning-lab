@@ -635,7 +635,7 @@ powers_df.isna().sum().sum()
 
 ```python
 """
-This dataframe has more rows than columns. Every single value
+This DataFrame has more rows than columns. Every single value
 in it is a bool, and there are no missing values.
 """
 ```
@@ -918,7 +918,11 @@ is meaningful and useful. We don't want to just haphazardly fill it in
 in order to be able to run a statistical test or model.
 
 Therefore let's go with option 2, and drop all of the rows where
-the publisher is missing.
+the publisher is missing. With this option, we reduce the possibility 
+of changing the meaningfulness of the data.
+
+If we were to choose option 1, we would need to choose values to replace the Nan's. We cannot use random values to fill in the Nan's since we don't know what the distribution of the different publishers are. Nor do we know the frequency of each publisher. So if we replaced the Nan's with random publishers, depending on the comic book hero, we could be over-representing or under-representing a particular publisher.
+
 """
 ```
 
@@ -954,28 +958,28 @@ heroes_df["Publisher"].value_counts()
     DC Comics            212
     NBC - Heroes          19
     Dark Horse Comics     18
-    George Lucas          14
     Image Comics          14
+    George Lucas          14
     Marvel                 9
-    Star Trek              6
     HarperCollins          6
+    Star Trek              6
     SyFy                   5
     Team Epic TV           5
-    Icon Comics            4
-    IDW Publishing         4
     Shueisha               4
     ABC Studios            4
-    Wildstorm              3
+    IDW Publishing         4
+    Icon Comics            4
      DC Comics             3
+    Wildstorm              3
     Sony Pictures          2
-    J. K. Rowling          1
-    Hanna-Barbera          1
-    J. R. R. Tolkien       1
-    Rebellion              1
-    Universal Studios      1
-    Microsoft              1
     South Park             1
     Titan Books            1
+    Microsoft              1
+    Universal Studios      1
+    Rebellion              1
+    J. R. R. Tolkien       1
+    J. K. Rowling          1
+    Hanna-Barbera          1
     Name: Publisher, dtype: int64
 
 
@@ -1015,26 +1019,26 @@ heroes_df["Publisher"].value_counts()
     DC Comics            215
     NBC - Heroes          19
     Dark Horse Comics     18
-    George Lucas          14
     Image Comics          14
+    George Lucas          14
     Star Trek              6
     HarperCollins          6
-    Team Epic TV           5
     SyFy                   5
-    IDW Publishing         4
+    Team Epic TV           5
     Shueisha               4
     ABC Studios            4
     Icon Comics            4
+    IDW Publishing         4
     Wildstorm              3
     Sony Pictures          2
-    J. K. Rowling          1
-    Hanna-Barbera          1
+    South Park             1
+    Titan Books            1
+    Microsoft              1
     Universal Studios      1
     Rebellion              1
     J. R. R. Tolkien       1
-    Microsoft              1
-    South Park             1
-    Titan Books            1
+    J. K. Rowling          1
+    Hanna-Barbera          1
     Name: Publisher, dtype: int64
 
 
@@ -1069,7 +1073,9 @@ ax2.set_title("Top 5 Publishers by Count of Superheroes");
 ```
 
 
+    
 ![png](index_files/index_44_0.png)
+    
 
 
 ## 3. Perform Data Aggregation and Cleaning Required to Answer Second Question
@@ -1605,11 +1611,11 @@ The fact that one of them is the values of a column and the other is the column
 names means that we will need to transpose one of them first. It makes the most
 sense to transpose powers_df since that will result in records still representing
 a hero, rather than a power. This will work with the question at hand, which asks
-about heights, which are attributes of superheroes, not attributers of superpowers.
+about heights, which are attributes of superheroes, not attributes of superpowers.
 
 powers_df has fewer columns than heroes_df has rows, but we can also see that
 powers_df contains names that are not present in heroes_df (namely '3-D Man'). So,
-it seems like an inner joing is the right approach, so that we only keep records
+it seems like an inner join is the right approach, so that we only keep records
 that are present in both datasets.
 """
 ```
@@ -1621,7 +1627,7 @@ In the cell below, create a new dataframe called `heroes_and_powers_df` that con
 
 ```python
 
-# First, get a transposed version of the powers dataframe. This means
+# First, get a transposed version of the powers DataFrame. This means
 # that what used to be the row index is now the column name, and vice
 # versa
 powers_df_transposed = powers_df.T
@@ -2272,12 +2278,12 @@ powers_df_transposed
 
 ```python
 
-# Then actually merge the dataframes together, using "name" as the shared key
+# Then actually merge the DataFrames together, using "name" as the shared key
 # and "inner" so we don't keep anything with a NaN on either side
 
-# If we had named the columns differently in the two dataframes, there is also
+# If we had named the columns differently in the two DataFrames, there is also
 # an option to specify `left_on` and `right_on` instead of just `on`. Just `on`
-# is like USING in a SQL join; it looks for the same column in both dataframes
+# is like USING in a SQL join; it looks for the same column in both DataFrames
 heroes_and_powers_df = heroes_df.merge(powers_df_transposed, on="name", how="inner")
 
 # Alternatively, you could set the index of both to be "name", then use .join
@@ -2607,7 +2613,7 @@ Run the code below to check your work:
 
 ```python
 
-# Confirms you have created a dataframe with the specified name
+# Confirms you have created a DataFrame with the specified name
 assert type(heroes_and_powers_df) == pd.DataFrame
 
 # Confirms you have the right number of rows
@@ -2618,7 +2624,7 @@ assert heroes_and_powers_df.shape[0] == 647
 # modify this test. We are checking that all of the powers are present as
 # columns.)
 assert [power in heroes_and_powers_df.columns for power in powers_df.index]
-# (If you modified the value of heroes_df along the way, you mgith need to 
+# (If you modified the value of heroes_df along the way, you might need to 
 # modify this as well. We are checking that all of the attribute columns from
 # heroes_df are present as columns in the joined df)
 assert [attribute in heroes_and_powers_df.columns for attribute in heroes_df.columns]
@@ -2972,7 +2978,9 @@ ax.set_title("Height vs. Power Count");
 ```
 
 
+    
 ![png](index_files/index_59_0.png)
+    
 
 
 Hmm...what is that stack of values off below zero? What is a "negative" height?
@@ -3511,7 +3519,9 @@ ax.set_title("Height vs. Power Count");
 ```
 
 
+    
 ![png](index_files/index_66_0.png)
+    
 
 
 Ok, that makes more sense. It looks like there is not much of a relationship between height and number of superpowers.
@@ -3561,7 +3571,9 @@ ax.legend();
 ```
 
 
+    
 ![png](index_files/index_68_0.png)
+    
 
 
 It appears that there is still no clear relationship between count of powers and height, regardless of gender. We do however note that "Male" is the most common gender, and that male superheroes tend to be taller, on average.
@@ -4439,7 +4451,9 @@ ax2.set_title("Frequency of Top Superpowers in DC Comics");
 ```
 
 
+    
 ![png](index_files/index_80_0.png)
+    
 
 
 It looks like super strength is the most popular power in both Marvel Comics and DC Comics. Overall, the top 5 powers are fairly similar — 4 out of 5 overlap, although Marvel contains agility whereas DC contains flight.
