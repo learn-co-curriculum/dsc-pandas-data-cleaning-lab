@@ -239,7 +239,7 @@ None
 """
 ```
 
-Now, implement the strategy to dropp rows with missing values using code. (You can also check the solution branch for the answer to the question above if you're really not sure.)
+Now, implement the strategy to drop rows with missing values using code. (You can also check the solution branch for the answer to the question above if you're really not sure.)
 
 
 ```python
