@@ -481,6 +481,13 @@ do with those "-" values.
 """
 ```
 
+
+
+
+    '\nThe data types seem to line up with what we expect. The columns\ncontaining strings are type object, whereas the columns containing\ndecimal numbers (height and weight) are type float64.\n\nWe can see that there are missing/NaN values in the Publisher and\nWeight columns, since there are 734 total rows and each of those\ncolumns contains fewer than 734 non-null values\n\nWe also see that this data source contains some placeholders for\nmissing values, rather than being NaN. Specifically in the Skin Color\ncolumn there are "-" characters filled in in some places. If we want\nto use that information, we\'ll need to make a decision about what to\ndo with those "-" values.\n'
+
+
+
 ### Superpowers
 
 Now, repeat the same process with `super_hero_powers.csv`. Name the dataframe `powers_df`. This time, make sure you use `index_col=0` when opening the CSV because the index contains important information.
@@ -716,6 +723,13 @@ This DataFrame has more rows than columns. Every single value
 in it is a bool, and there are no missing values.
 """
 ```
+
+
+
+
+    '\nThis DataFrame has more rows than columns. Every single value\nin it is a bool, and there are no missing values.\n'
+
+
 
 The following code will check if it was loaded correctly:
 
@@ -1049,7 +1063,14 @@ If we were to choose option 1, we would need to choose values to replace the Nan
 """
 ```
 
-Now, implement your chosen strategy using code. (You can also check the solution branch for the answer to the question above if you're really not sure.)
+
+
+
+    '\nLet\'s take a look at those examples. We have Chuck Norris (an actual\nperson), Katniss Everdeen (a character from The Hunger Games books and\nmovies), and Flash Gordon (a character from comics published by King\nFeatures Syndicate). It doesn\'t seem very sensible to fill in the\nmost common publisher (to say that these are all Marvel Comics), or\nto put them all in the same "other" bucket.\n\nAlso since the publisher is the only relevant variable for this\nquestion, we want to be more careful that the information encoded there\nis meaningful and useful. We don\'t want to just haphazardly fill it in\nin order to be able to run a statistical test or model.\n\nTherefore let\'s go with option 2, and drop all of the rows where\nthe publisher is missing. With this option, we reduce the possibility \nof changing the meaningfulness of the data.\n\nIf we were to choose option 1, we would need to choose values to replace the Nan\'s. We cannot use random values to fill in the Nan\'s since we don\'t know what the distribution of the different publishers are. Nor do we know the frequency of each publisher. So if we replaced the Nan\'s with random publishers, depending on the comic book hero, we could be over-representing or under-representing a particular publisher.\n\n'
+
+
+
+Now, implement the strategy to dropp rows with missing values using code. (You can also check the solution branch for the answer to the question above if you're really not sure.)
 
 
 ```python
@@ -1101,28 +1122,28 @@ heroes_df["Publisher"].value_counts()
     DC Comics            212
     NBC - Heroes          19
     Dark Horse Comics     18
-    Image Comics          14
     George Lucas          14
+    Image Comics          14
     Marvel                 9
-    HarperCollins          6
     Star Trek              6
-    SyFy                   5
+    HarperCollins          6
     Team Epic TV           5
-    Shueisha               4
-    ABC Studios            4
+    SyFy                   5
     IDW Publishing         4
     Icon Comics            4
-     DC Comics             3
+    ABC Studios            4
+    Shueisha               4
     Wildstorm              3
+     DC Comics             3
     Sony Pictures          2
-    South Park             1
     Titan Books            1
     Microsoft              1
-    Universal Studios      1
     Rebellion              1
-    J. R. R. Tolkien       1
-    J. K. Rowling          1
     Hanna-Barbera          1
+    J. K. Rowling          1
+    Universal Studios      1
+    South Park             1
+    J. R. R. Tolkien       1
     Name: Publisher, dtype: int64
 
 
@@ -1147,6 +1168,13 @@ None
 (2) We have both "DC Comics" and " DC Comics" (with an extra space at the beginning)
 """
 ```
+
+
+
+
+    '\n(1) We have both "Marvel Comics" and "Marvel" (missing the word "Comics")\n(2) We have both "DC Comics" and " DC Comics" (with an extra space at the beginning)\n'
+
+
 
 Now, write some code to handle these cases. If you're not sure where to start, look at the pandas documentation for [replacing values](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.replace.html) and [stripping off whitespace](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.strip.html).
 
@@ -1184,26 +1212,26 @@ heroes_df["Publisher"].value_counts()
     DC Comics            215
     NBC - Heroes          19
     Dark Horse Comics     18
-    Image Comics          14
     George Lucas          14
+    Image Comics          14
     Star Trek              6
     HarperCollins          6
     SyFy                   5
     Team Epic TV           5
-    Shueisha               4
-    ABC Studios            4
     Icon Comics            4
+    ABC Studios            4
     IDW Publishing         4
+    Shueisha               4
     Wildstorm              3
     Sony Pictures          2
-    South Park             1
-    Titan Books            1
-    Microsoft              1
-    Universal Studios      1
-    Rebellion              1
-    J. R. R. Tolkien       1
-    J. K. Rowling          1
     Hanna-Barbera          1
+    South Park             1
+    Universal Studios      1
+    J. K. Rowling          1
+    Titan Books            1
+    Rebellion              1
+    Microsoft              1
+    J. R. R. Tolkien       1
     Name: Publisher, dtype: int64
 
 
@@ -1832,6 +1860,13 @@ it seems like an inner join is the right approach, so that we only keep records
 that are present in both datasets.
 """
 ```
+
+
+
+
+    "\nThe shared key between these datasets is the name of the superhero. In heroes_df,\nthis is represented by the name column. In powers_df, this is represented by the\ncolumn names themselves.\n\nThe fact that one of them is the values of a column and the other is the column\nnames means that we will need to transpose one of them first. It makes the most\nsense to transpose powers_df since that will result in records still representing\na hero, rather than a power. This will work with the question at hand, which asks\nabout heights, which are attributes of superheroes, not attributes of superpowers.\n\npowers_df has fewer columns than heroes_df has rows, but we can also see that\npowers_df contains names that are not present in heroes_df (namely '3-D Man'). So,\nit seems like an inner join is the right approach, so that we only keep records\nthat are present in both datasets.\n"
+
+
 
 In the cell below, create a new dataframe called `heroes_and_powers_df` that contains the joined data. You can look at the above answer in the solution branch if you're not sure where to start.
 
