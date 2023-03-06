@@ -947,7 +947,7 @@ If we were to choose option 1, we would need to choose values to replace the Nan
 
 
 
-Now, implement the strategy to dropp rows with missing values using code. (You can also check the solution branch for the answer to the question above if you're really not sure.)
+Now, implement the strategy to drop rows with missing values using code. (You can also check the solution branch for the answer to the question above if you're really not sure.)
 
 
 ```python
