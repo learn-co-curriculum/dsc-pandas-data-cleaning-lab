@@ -89,16 +89,18 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+
 %matplotlib inline
 ```
 
 
 ```python
-# __SOLUTION__ 
+# __SOLUTION__
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+
 %matplotlib inline
 ```
 
@@ -116,7 +118,7 @@ heroes_df.head()
 
 ```python
 # __SOLUTION__
-heroes_df = pd.read_csv('heroes_information.csv')
+heroes_df = pd.read_csv("heroes_information.csv")
 heroes_df.head()
 ```
 
@@ -248,7 +250,7 @@ heroes_df.head()
 
 ```python
 # __SOLUTION__
-heroes_df = pd.read_csv('heroes_information.csv', index_col=0)
+heroes_df = pd.read_csv("heroes_information.csv", index_col=0)
 heroes_df.head()
 ```
 
@@ -371,8 +373,18 @@ assert heroes_df.shape[0] == 734
 assert heroes_df.shape[1] == 10
 
 # These should be the columns
-assert list(heroes_df.columns) == ['name', 'Gender', 'Eye color', 'Race',
- 'Hair color', 'Height', 'Publisher', 'Skin color', 'Alignment', 'Weight']
+assert list(heroes_df.columns) == [
+    "name",
+    "Gender",
+    "Eye color",
+    "Race",
+    "Hair color",
+    "Height",
+    "Publisher",
+    "Skin color",
+    "Alignment",
+    "Weight",
+]
 ```
 
 
@@ -387,8 +399,18 @@ assert heroes_df.shape[0] == 734
 assert heroes_df.shape[1] == 10
 
 # These should be the columns
-assert list(heroes_df.columns) == ['name', 'Gender', 'Eye color', 'Race',
- 'Hair color', 'Height', 'Publisher', 'Skin color', 'Alignment', 'Weight']
+assert list(heroes_df.columns) == [
+    "name",
+    "Gender",
+    "Eye color",
+    "Race",
+    "Hair color",
+    "Height",
+    "Publisher",
+    "Skin color",
+    "Alignment",
+    "Weight",
+]
 ```
 
 Now you want to get familiar with the data.  This step includes:
@@ -500,7 +522,7 @@ Now, repeat the same process with `super_hero_powers.csv`. Name the dataframe `p
 
 ```python
 # __SOLUTION__
-powers_df = pd.read_csv('super_hero_powers.csv', index_col=0)
+powers_df = pd.read_csv("super_hero_powers.csv", index_col=0)
 powers_df.head()
 ```
 
@@ -741,16 +763,16 @@ The following code will check if it was loaded correctly:
 assert powers_df.shape == (167, 667)
 
 # The first column should be '3-D Man'
-assert powers_df.columns[0] == '3-D Man'
+assert powers_df.columns[0] == "3-D Man"
 
 # The last column should be 'Zoom'
-assert powers_df.columns[-1] == 'Zoom'
+assert powers_df.columns[-1] == "Zoom"
 
 # The first index should be 'Agility'
-assert powers_df.index[0] == 'Agility'
+assert powers_df.index[0] == "Agility"
 
 # The last index should be 'Omniscient'
-assert powers_df.index[-1] == 'Omniscient'
+assert powers_df.index[-1] == "Omniscient"
 ```
 
 
@@ -761,16 +783,16 @@ assert powers_df.index[-1] == 'Omniscient'
 assert powers_df.shape == (167, 667)
 
 # The first column should be '3-D Man'
-assert powers_df.columns[0] == '3-D Man'
+assert powers_df.columns[0] == "3-D Man"
 
 # The last column should be 'Zoom'
-assert powers_df.columns[-1] == 'Zoom'
+assert powers_df.columns[-1] == "Zoom"
 
 # The first index should be 'Agility'
-assert powers_df.index[0] == 'Agility'
+assert powers_df.index[0] == "Agility"
 
 # The last index should be 'Omniscient'
-assert powers_df.index[-1] == 'Omniscient'
+assert powers_df.index[-1] == "Omniscient"
 ```
 
 ## 2. Perform Data Cleaning Required to Answer First Question
@@ -786,14 +808,18 @@ As you likely noted above, the `Publisher` column is missing some values. Let's 
 
 ```python
 # Run this cell without changes
-has_publisher_sample = heroes_df[heroes_df["Publisher"].notna()].sample(5, random_state=1)
+has_publisher_sample = heroes_df[heroes_df["Publisher"].notna()].sample(
+    5, random_state=1
+)
 has_publisher_sample
 ```
 
 
 ```python
 # __SOLUTION__
-has_publisher_sample = heroes_df[heroes_df["Publisher"].notna()].sample(5, random_state=1)
+has_publisher_sample = heroes_df[heroes_df["Publisher"].notna()].sample(
+    5, random_state=1
+)
 has_publisher_sample
 ```
 
@@ -905,14 +931,18 @@ has_publisher_sample
 
 ```python
 # Run this cell without changes
-missing_publisher_sample = heroes_df[heroes_df["Publisher"].isna()].sample(5, random_state=1)
+missing_publisher_sample = heroes_df[heroes_df["Publisher"].isna()].sample(
+    5, random_state=1
+)
 missing_publisher_sample
 ```
 
 
 ```python
 # __SOLUTION__
-missing_publisher_sample = heroes_df[heroes_df["Publisher"].isna()].sample(5, random_state=1)
+missing_publisher_sample = heroes_df[heroes_df["Publisher"].isna()].sample(
+    5, random_state=1
+)
 missing_publisher_sample
 ```
 
@@ -2881,7 +2911,7 @@ assert heroes_and_powers_df.shape[0] == 647
 # modify this test. We are checking that all of the powers are present as
 # columns.)
 assert [power in heroes_and_powers_df.columns for power in powers_df.index]
-# (If you modified the value of heroes_df along the way, you might need to 
+# (If you modified the value of heroes_df along the way, you might need to
 # modify this as well. We are checking that all of the attribute columns from
 # heroes_df are present as columns in the joined df)
 assert [attribute in heroes_and_powers_df.columns for attribute in heroes_df.columns]
@@ -2902,7 +2932,7 @@ assert heroes_and_powers_df.shape[0] == 647
 # modify this test. We are checking that all of the powers are present as
 # columns.)
 assert [power in heroes_and_powers_df.columns for power in powers_df.index]
-# (If you modified the value of heroes_df along the way, you might need to 
+# (If you modified the value of heroes_df along the way, you might need to
 # modify this as well. We are checking that all of the attribute columns from
 # heroes_df are present as columns in the joined df)
 assert [attribute in heroes_and_powers_df.columns for attribute in heroes_df.columns]
@@ -2916,7 +2946,9 @@ Now that we have created a joined dataframe, we can aggregate the number of supe
 
 # Note: we can use sum() with True and False values and they will
 # automatically be cast to 1s and 0s
-heroes_and_powers_df["Power Count"] = sum([heroes_and_powers_df[power_name] for power_name in powers_df.index])
+heroes_and_powers_df["Power Count"] = sum(
+    [heroes_and_powers_df[power_name] for power_name in powers_df.index]
+)
 heroes_and_powers_df
 ```
 
@@ -2926,7 +2958,9 @@ heroes_and_powers_df
 
 # Note: we can use sum() with True and False values and they will
 # automatically be cast to 1s and 0s
-heroes_and_powers_df["Power Count"] = sum([heroes_and_powers_df[power_name] for power_name in powers_df.index])
+heroes_and_powers_df["Power Count"] = sum(
+    [heroes_and_powers_df[power_name] for power_name in powers_df.index]
+)
 heroes_and_powers_df
 ```
 
@@ -3257,9 +3291,7 @@ Now we can plot the height vs. the count of powers:
 fig, ax = plt.subplots(figsize=(16, 8))
 
 ax.scatter(
-    x=heroes_and_powers_df["Height"],
-    y=heroes_and_powers_df["Power Count"],
-    alpha=0.3
+    x=heroes_and_powers_df["Height"], y=heroes_and_powers_df["Power Count"], alpha=0.3
 )
 
 ax.set_xlabel("Height (cm)")
@@ -3274,9 +3306,7 @@ ax.set_title("Height vs. Power Count");
 fig, ax = plt.subplots(figsize=(16, 8))
 
 ax.scatter(
-    x=heroes_and_powers_df["Height"],
-    y=heroes_and_powers_df["Power Count"],
-    alpha=0.3
+    x=heroes_and_powers_df["Height"], y=heroes_and_powers_df["Power Count"], alpha=0.3
 )
 
 ax.set_xlabel("Height (cm)")
@@ -3830,11 +3860,7 @@ Now we can redo that plot without those negative heights:
 
 fig, ax = plt.subplots(figsize=(16, 8))
 
-ax.scatter(
-    x=question_2_df["Height"],
-    y=question_2_df["Power Count"],
-    alpha=0.3
-)
+ax.scatter(x=question_2_df["Height"], y=question_2_df["Power Count"], alpha=0.3)
 
 ax.set_xlabel("Height (cm)")
 ax.set_ylabel("Number of Superpowers")
@@ -3847,11 +3873,7 @@ ax.set_title("Height vs. Power Count");
 
 fig, ax = plt.subplots(figsize=(16, 8))
 
-ax.scatter(
-    x=question_2_df["Height"],
-    y=question_2_df["Power Count"],
-    alpha=0.3
-)
+ax.scatter(x=question_2_df["Height"], y=question_2_df["Power Count"], alpha=0.3)
 
 ax.set_xlabel("Height (cm)")
 ax.set_ylabel("Number of Superpowers")
@@ -3879,7 +3901,9 @@ fig, ax = plt.subplots(figsize=(16, 8))
 # Select subsets
 question_2_male = question_2_df[question_2_df["Gender"] == "Male"]
 question_2_female = question_2_df[question_2_df["Gender"] == "Female"]
-question_2_other = question_2_df[(question_2_df["Gender"] != "Male") & (question_2_df["Gender"] != "Female")]
+question_2_other = question_2_df[
+    (question_2_df["Gender"] != "Male") & (question_2_df["Gender"] != "Female")
+]
 
 # Plot data with different colors
 ax.scatter(
@@ -3887,21 +3911,21 @@ ax.scatter(
     y=question_2_male["Power Count"],
     alpha=0.5,
     color="cyan",
-    label="Male"
+    label="Male",
 )
 ax.scatter(
     x=question_2_female["Height"],
     y=question_2_female["Power Count"],
     alpha=0.5,
     color="gray",
-    label="Female"
+    label="Female",
 )
 ax.scatter(
     x=question_2_other["Height"],
     y=question_2_other["Power Count"],
     alpha=0.5,
     color="yellow",
-    label="Other"
+    label="Other",
 )
 
 # Customize appearance
@@ -3920,7 +3944,9 @@ fig, ax = plt.subplots(figsize=(16, 8))
 # Select subsets
 question_2_male = question_2_df[question_2_df["Gender"] == "Male"]
 question_2_female = question_2_df[question_2_df["Gender"] == "Female"]
-question_2_other = question_2_df[(question_2_df["Gender"] != "Male") & (question_2_df["Gender"] != "Female")]
+question_2_other = question_2_df[
+    (question_2_df["Gender"] != "Male") & (question_2_df["Gender"] != "Female")
+]
 
 # Plot data with different colors
 ax.scatter(
@@ -3928,21 +3954,21 @@ ax.scatter(
     y=question_2_male["Power Count"],
     alpha=0.5,
     color="cyan",
-    label="Male"
+    label="Male",
 )
 ax.scatter(
     x=question_2_female["Height"],
     y=question_2_female["Power Count"],
     alpha=0.5,
     color="gray",
-    label="Female"
+    label="Female",
 )
 ax.scatter(
     x=question_2_other["Height"],
     y=question_2_other["Power Count"],
     alpha=0.5,
     color="yellow",
-    label="Other"
+    label="Other",
 )
 
 # Customize appearance
@@ -3991,8 +4017,8 @@ question_3_df = heroes_and_powers_df.copy()
 
 # Only rows with a relevant publisher
 question_3_df = question_3_df[
-    (question_3_df["Publisher"] == "Marvel Comics") | \
-    (question_3_df["Publisher"] == "DC Comics")
+    (question_3_df["Publisher"] == "Marvel Comics")
+    | (question_3_df["Publisher"] == "DC Comics")
 ]
 
 # Only columns needed are Publisher and powers
@@ -4685,7 +4711,11 @@ assert type(question_3_df) == pd.DataFrame
 assert question_3_df.shape == (167, 3)
 
 # Checking the column names
-assert sorted(list(question_3_df.columns)) == ['DC Comics', 'Marvel Comics', 'Superpower Name']
+assert sorted(list(question_3_df.columns)) == [
+    "DC Comics",
+    "Marvel Comics",
+    "Superpower Name",
+]
 ```
 
 
@@ -4699,7 +4729,11 @@ assert type(question_3_df) == pd.DataFrame
 assert question_3_df.shape == (167, 3)
 
 # Checking the column names
-assert sorted(list(question_3_df.columns)) == ['DC Comics', 'Marvel Comics', 'Superpower Name']
+assert sorted(list(question_3_df.columns)) == [
+    "DC Comics",
+    "Marvel Comics",
+    "Superpower Name",
+]
 ```
 
 ### Answering the Question
@@ -4711,7 +4745,9 @@ The code below uses the dataframe you created to find and plot the most common s
 # Run this cell without changes
 
 marvel_most_common = question_3_df.drop("DC Comics", axis=1)
-marvel_most_common = marvel_most_common.sort_values(by="Marvel Comics", ascending=False)[:5]
+marvel_most_common = marvel_most_common.sort_values(
+    by="Marvel Comics", ascending=False
+)[:5]
 marvel_most_common
 ```
 
@@ -4720,7 +4756,9 @@ marvel_most_common
 # __SOLUTION__
 
 marvel_most_common = question_3_df.drop("DC Comics", axis=1)
-marvel_most_common = marvel_most_common.sort_values(by="Marvel Comics", ascending=False)[:5]
+marvel_most_common = marvel_most_common.sort_values(
+    by="Marvel Comics", ascending=False
+)[:5]
 marvel_most_common
 ```
 
@@ -4863,13 +4901,9 @@ dc_most_common
 fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(15, 5))
 
 ax1.bar(
-    x=marvel_most_common["Superpower Name"],
-    height=marvel_most_common["Marvel Comics"]
+    x=marvel_most_common["Superpower Name"], height=marvel_most_common["Marvel Comics"]
 )
-ax2.bar(
-    x=dc_most_common["Superpower Name"],
-    height=dc_most_common["DC Comics"]
-)
+ax2.bar(x=dc_most_common["Superpower Name"], height=dc_most_common["DC Comics"])
 
 ax1.set_ylabel("Count of Superheroes")
 ax2.set_ylabel("Count of Superheroes")
@@ -4884,13 +4918,9 @@ ax2.set_title("Frequency of Top Superpowers in DC Comics");
 fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(15, 5))
 
 ax1.bar(
-    x=marvel_most_common["Superpower Name"],
-    height=marvel_most_common["Marvel Comics"]
+    x=marvel_most_common["Superpower Name"], height=marvel_most_common["Marvel Comics"]
 )
-ax2.bar(
-    x=dc_most_common["Superpower Name"],
-    height=dc_most_common["DC Comics"]
-)
+ax2.bar(x=dc_most_common["Superpower Name"], height=dc_most_common["DC Comics"])
 
 ax1.set_ylabel("Count of Superheroes")
 ax2.set_ylabel("Count of Superheroes")
