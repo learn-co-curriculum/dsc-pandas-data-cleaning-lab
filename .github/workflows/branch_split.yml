@@ -4,6 +4,7 @@ on:
   push:
     branches: curriculum
     paths: index.ipynb
+  workflow_dispatch:
 
 jobs:
   Test_remote_action:
